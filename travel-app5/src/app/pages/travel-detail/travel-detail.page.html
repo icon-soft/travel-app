@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <p>Départ : <ion-label color="secondary"> {{name}}</ion-label>
+      </p>
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+
+    <form #searchLoanForm="ngForm" (ngSubmit)="searchLoansByType(searchLoanForm)">
+      <ion-item>
+        <ion-datetime value="{{myDate}}" min="{{dateJour}}" #piker displayFormat="DD MMMM YYYY" pickerFormat="DD MMMM YYYY"
+          placeholder="Selectionnez une date !!! " (ionChange)="dateSelect(piker.value)"></ion-datetime>
+        <ion-icon name="calendar" slot="end"></ion-icon>
+        <!-- <ion-buttons slot="end">
+          <ion-button color="dark" (click)="searchLoanForm1()">
+            <ion-icon name="search-sharp" style="zoom:1.5;"></ion-icon>
+          </ion-button>
+        </ion-buttons> -->
+      </ion-item>
+    </form>
+  </ion-card>
+
+  <ion-item-divider *ngIf="searchTraveResult.length>0">Les voyages trouvés à cette date !!!</ion-item-divider>
+  <br />
+  <ion-item-divider *ngIf="searchTraveResult.length<=0">
+    <ion-label color="danger">
+      <!-- <ion-alert isOpen={showAlert1} onDidDismiss={setShowAlert1(false)} cssClass='my-custom-class' header='Alert'
+        subHeader='Subtitle' message='This is an alert message.' buttons='OK'></ion-alert> -->
+      Aucun voyage trouvé à cette date !!!
+    </ion-label>
+  </ion-item-divider>
+  <!-- #C70039 -->
+  <ion-card *ngIf="searchTraveResult.length>0">
+    <ion-list *ngFor="let pv of searchTraveResult; let i = index">
+      <ion-list-header style="background-color:#0ABAB5 ; color: #fafafa; " color="#FF5733" (click)="selectedIndex = i"
+        [routerLink]="'/travel-place/' + pv.pk.travel.id" [class.selected]="selectedIndex == i">
+        <h4>{{pv.pk.travel.villeDepart}} => {{pv.pk.travel.villeArrivee}}</h4>
+      </ion-list-header>
+      <ion-item-group (click)="selectedIndex = i" [routerLink]="'/travel-place/' + pv.pk.travel.id"
+        [class.selected]="selectedIndex == i">
+        <ion-item lines="none">
+          <ion-label>Voyage n°</ion-label>
+          <ion-badge color="primary" slot="end">{{pv.pk.travel.numero}}</ion-badge>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label>Prix</ion-label>
+          <ion-badge color="secondary" slot="end">{{pv.prix}}</ion-badge>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label>Date</ion-label>
+          <ion-badge color="tertiary" slot="end">{{pv.dateProjectionTravel | date:'dd/MM/yyyy'}}</ion-badge>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label>Heure départ</ion-label>
+          <ion-badge color="success" slot="end">{{pv.pk.travel.heureDepart}}</ion-badge>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label>Type voyage</ion-label>
+          <ion-badge color="danger" slot="end">{{pv.pk.travel.categoryTravel}}</ion-badge>
+        </ion-item>
+
+      </ion-item-group>
+
+
+      <!-- <ion-item (click)="selectedIndex = i" [routerLink]="'/travel-place/' + pv.pk.travel.id"
+        [class.selected]="selectedIndex == i">
+        <ion-label>
+          <h3>Voyage n°</h3>
+        </ion-label>
+        <ion-badge color="primary" slot="end">{{pv.pk.travel.numero}}</ion-badge>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <h3>Prix</h3>
+        </ion-label>
+        <ion-badge color="secondary" slot="end">{{pv.prix}}</ion-badge>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <h3>Date</h3>
+        </ion-label>
+        <ion-badge color="tertiary" slot="end">{{pv.dateProjectionTravel | date:'dd/MM/yyyy'}}</ion-badge>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <h3>Heure départ</h3>
+        </ion-label>
+        <ion-badge color="success" slot="end">{{pv.pk.travel.heureDepart}}</ion-badge>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <h3>Type voyage </h3>
+        </ion-label>
+        <ion-badge color="danger" slot="end">{{pv.pk.travel.categoryTravel}}</ion-badge>
+      </ion-item> -->
+    </ion-list>
+  </ion-card>
+</ion-content>

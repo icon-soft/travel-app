@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="danger" (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios"></span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Payement</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="background-color: cadetblue;">
+  <ion-card *ngIf="selectedTickets.length>0">
+    <!-- <ion-card-header> -->
+    <ion-item>
+      <span>Vous avez selectionnez la place n° <ion-badge color="success">{{selectedTickets[0].place.numero}}
+        </ion-badge>
+      </span>
+    </ion-item>
+    <!-- </ion-card-header> -->
+  </ion-card>
+
+  <ion-card *ngIf="selectedTickets.length>0">
+    <!-- <form #f="ngForm" (ngSubmit)="onPayTickets(f.value)"> -->
+    <form [formGroup]="myForm" novalidate (ngSubmit)="onPayTickets()">
+      <ion-grid>
+        <ion-row class="form-group" [ngClass]="{'has-error':!myForm.controls['cni'].valid}">
+          <ion-item>
+            <ion-label position="floating">CNI</ion-label>
+            <ion-input type="text" class="form-control" name="cni" formControlName="cni"></ion-input>
+          </ion-item>
+          <ion-item>
+            <p *ngIf="myForm.controls['cni'].hasError('required') && myForm.controls['cni'].dirty">
+              CNI is required
+            </p>
+            <p *ngIf="myForm.controls['cni'].hasError('minlength')">
+              Your CNI must be at least 9 characters long.
+            </p>
+            <p *ngIf="myForm.controls['cni'].hasError('maxLength')">
+              Your CNI must be at 9 characters long.
+            </p>
+            <p *ngIf="myForm.controls['cni'].hasError('pattern')">
+              Le format de la cni n'est pas correct.
+            </p>
+          </ion-item>
+
+          <!-- <ion-input type="text" class="form-control" name="cni" formControlName="cni" placeholder="CNI :"> </ion-input> -->
+
+        </ion-row>
+        <ion-row class="form-group" [ngClass]="{'has-error':!myForm.controls['name'].valid}">
+          <ion-item>
+            <ion-label position="floating">Nom et prénom du client</ion-label>
+            <ion-input type="text" class="form-control" name="name" formControlName="name"> </ion-input>
+          </ion-item>
+          <ion-item>
+            <p *ngIf="myForm.controls['name'].hasError('required') && myForm.controls['name'].dirty">
+              Name is required
+            </p>
+            <p *ngIf="myForm.controls['name'].hasError('minlength')">Your name must be at least 3 characters long.
+            </p>
+          </ion-item>
+
+        </ion-row>
+        <ion-row>
+          <ion-item>
+            <ion-label position="floating">Code paiement</ion-label>
+            <ion-input type="text" class="form-control" name="codePayement" formControlName="codePayement"> </ion-input>
+          </ion-item>
+        </ion-row>
+        <ion-row class="form-group" [ngClass]="{'has-error':!myForm.controls['tel'].valid}">
+          <ion-item>
+            <ion-label position="floating">Num Téléphone</ion-label>
+            <ion-input type="tel" class="form-control" id="tel" name="tel" formControlName="tel"> </ion-input>
+          </ion-item>
+          <ion-item>
+            <p *ngIf="myForm.controls['tel'].hasError('minlength')">
+              Your phone must be at least 9 characters long.
+            </p>
+            <p *ngIf="myForm.controls['tel'].hasError('required') && myForm.controls['tel'].dirty">
+              phone is required
+            </p>
+            <p *ngIf="myForm.controls['tel'].hasError('pattern')">
+              Le format n'est pas correct.
+            </p>
+          </ion-item>
+
+        </ion-row>
+        <ion-row>
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email" name="email" formControlName="email">
+            </ion-input>
+          </ion-item>
+        </ion-row>
+
+        <!-- <ion-row> -->
+        <ion-button type="submit" expand="block" [disabled]="!myForm.valid">Payer</ion-button>
+        <!-- </ion-row> -->
+      </ion-grid>
+    </form>
+  </ion-card>
+</ion-content>

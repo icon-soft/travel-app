@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{ name }}
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content inset="true">
+  <ion-list>
+    <ion-list-header>
+      <ion-label>LES AGENCES DE VOYAGE</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let ag of agencys; let i = index" (click)="selectedIndex = i" [routerLink]="'/travel-detail/' + ag.id+'/'+ag.name"
+    [class.selected]="selectedIndex == i">
+      <ion-avatar slot="start">
+        <img [src]="this.host+'/images/'+ag.photo">
+      </ion-avatar>
+      <ion-label text-wrap>
+        <h3>{{ag.name}}</h3>
+        <p>{{ag.description}}</p>
+      </ion-label>
+      <ion-icon name="eye" color="success"  slot="end"></ion-icon>
+      <!-- <ion-icon name="create" color="danger" slot="end" (click)="editModal(x,i)"></ion-icon> -->
+    </ion-item>
+  </ion-list>
+</ion-content>

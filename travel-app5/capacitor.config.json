@@ -1,0 +1,16 @@
+{
+  "appId": "io.ionic.starter",
+  "appName": "travel-app5",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {},
+  "server": {
+    "url": "http://192.168.8.100:8100"
+  }
+}

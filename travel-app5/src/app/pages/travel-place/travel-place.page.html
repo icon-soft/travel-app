@@ -1,0 +1,246 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="projectionTravelId">
+      <legend><b>
+          <ion-label color="secondary">{{projectionTravelId.pk.agency.name}}</ion-label>
+        </b></legend>
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="tl-ion-card" *ngIf="projectionTravelId">
+    <ion-card-header>
+      <ion-card-title>
+        <legend><b>BUS : {{projectionTravelId.pk.bus.immatricule}}</b>
+        </legend>
+      </ion-card-title>
+      <ion-card-subtitle>Voyage n°{{projectionTravelId.pk.travel.numero}},
+        {{projectionTravelId.pk.travel.categoryTravel}}</ion-card-subtitle>
+      <ion-card-subtitle>
+        <span>
+          <ion-label>Places restantes :
+            <ion-badge color="danger">{{projectionTravelId.totalPlaceLibre}}</ion-badge>
+          </ion-label>
+        </span>
+        <span>
+          <ion-label> Places occupées :
+            <ion-badge color="success"> {{projectionTravelId.totalPlaceOccupe}}</ion-badge>
+          </ion-label>
+        </span>
+      </ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+  <ion-slides #signupSlider pager>
+
+    <ion-slide>
+      <ion-grid *ngIf="projectionTravelId">
+
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              <small>Configuration du bus</small>
+            </ion-card-title>
+            <ion-card-subtitle>
+              <div class="lt-grid-container" *ngIf="projectionTravelId.tickets.length==70">
+                <div class="lt-chauffeur">
+                  <ion-button color="medium"><small>Chauffeur</small></ion-button>
+                </div>
+                <div class="lt-entree"><small>Entrée «--</small></div>
+                <div class="lt-sortie"><small>Sortie --»</small></div>
+                <div class="lt-p{{i+1}}" *ngFor="let t of projectionTravelId.tickets; let i = index">
+                  <div *ngIf="i>=1">
+                    <ion-button [disabled]="t.reserve" class="{{getTicketClass(t)}}" (click)="onSelectTicket(t)">
+                      {{t.place.numero}}<div class="closebox" *ngIf="t.reserve">X</div>
+                    </ion-button>
+                  </div>
+                </div>
+                <div class="lt-v1"></div>
+                <div class="lt-v2"></div>
+                <div class="lt-v3"></div>
+                <div class="lt-v4"></div>
+                <div class="lt-v5"></div>
+                <div class="lt-v6"></div>
+                <div class="lt-v7"></div>
+                <div class="lt-v8"></div>
+                <div class="lt-v9"></div>
+                <div class="lt-v10"></div>
+                <div class="lt-v11"></div>
+                <div class="lt-v12"></div>
+                <div class="lt-v13"></div>
+                <div class="lt-v14"></div>
+                <div class="lt-v15"></div>
+                <div class="lt-v17"></div>
+                <div class="lt-v16"></div>
+                <div class="lt-v18"></div>
+              </div>
+              <div class="lt-grid-container1" *ngIf="projectionTravelId.tickets.length==62">
+                <div class="lt-chauffeur1">
+                  <ion-button color="medium">Chauffeur</ion-button>
+                </div>
+                <div class="lt-pp{{i+1}}" *ngFor="let t of projectionTravelId.tickets; let i = index">
+                  <div *ngIf="i>=1">
+                    <ion-button [disabled]="t.reserve" class="{{getTicketClass(t)}}" (click)="onSelectTicket(t)">
+                      {{t.place.numero}}<div class="closebox" *ngIf="t.reserve">X</div>
+                    </ion-button>
+                  </div>
+                </div>
+                <div class="lt-vv1"></div>
+                <div class="lt-vv2"></div>
+                <div class="lt-vv3"></div>
+                <div class="lt-vv4"></div>
+                <div class="lt-vv5"></div>
+                <div class="lt-vv6"></div>
+                <div class="lt-vv7"></div>
+                <div class="lt-vv8"></div>
+                <div class="lt-vv10"></div>
+                <div class="lt-vv9"></div>
+                <div class="lt-vv11"></div>
+                <div class="lt-vv12"></div>
+                <div class="lt-vv13"></div>
+                <div class="lt-vv14"></div>
+                <div class="lt-vv15"></div>
+                <div class="lt-entrees">ENTREE</div>
+                <div class="lt-entrees2">«-</div>
+                <div class="lt-vv16"></div>
+                <div class="lt-vv17"></div>
+                <div class="lt-vv18"></div>
+                <div class="lt-vv19"></div>
+                <div class="lt-vv20"></div>
+                <div class="lt-vv21"></div>
+                <div class="lt-vv22"></div>
+                <div class="lt-sorties">SORTIE</div>
+                <div class="lt-sorties2">-»</div>
+                <div class="lt-vv23"></div>
+                <div class="lt-vv24"></div>
+              </div>
+              <div class="grid-container" *ngIf="projectionTravelId.tickets.length==68">
+                <div class="chauffeur">
+                  <ion-button color="medium" class="btn">Chauffeur</ion-button>
+                </div>
+                <div class="p{{i}}" *ngFor="let t of projectionTravelId.tickets; let i = index">
+                  <div *ngIf="i>=1">
+                    <ion-button [disabled]="t.reserve" class="{{getTicketClass(t)}}" (click)="onSelectTicket(t)">
+                      {{t.place.numero}}<div class="closebox" *ngIf="t.reserve">X</div>
+                    </ion-button>
+                  </div>
+                </div>
+                <div class="v1"></div>
+                <div class="v2"></div>
+                <div class="v3"></div>
+                <div class="v4"></div>
+                <div class="entree">Entrée</div>
+                <div class="v5"></div>
+                <div class="v6"></div>
+                <div class="v7"></div>
+                <div class="v8"></div>
+                <div class="v9"></div>
+                <div class="v10"></div>
+                <div class="v11"></div>
+                <div class="v12"></div>
+                <div class="v13"></div>
+                <div class="v14"></div>
+                <div class="v15"></div>
+                <div class="sortie">Sortie</div>
+                <div class="v16"></div>
+                <div class="v17"></div>
+              </div>
+            </ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-grid>
+    </ion-slide>
+
+    <ion-slide>
+
+
+      <ion-card class="pay-ion-card" *ngIf="selectedTickets.length>0">
+
+        <ion-item-divider color="warning">
+          <ion-label>Vous avez selectionnez la place n° <ion-badge color="secondary">{{selectedTickets[0].place.numero}}
+            </ion-badge>
+          </ion-label>
+        </ion-item-divider>
+        <!-- <form #f="ngForm" (ngSubmit)="onPayTickets(f.value)"> -->
+        <form [formGroup]="myForm" novalidate (ngSubmit)="onPayTickets()">
+          <ion-grid>
+            <ion-row class="form-group" [ngClass]="{'has-error':!myForm.controls['cni'].valid}">
+              <ion-item>
+                <ion-label position="floating">CNI</ion-label>
+                <ion-input type="number" class="form-control" name="cni" formControlName="cni"></ion-input>
+              </ion-item>
+              <ion-item>
+                <p *ngIf="myForm.controls['cni'].hasError('required') && myForm.controls['cni'].dirty">
+                  CNI is required
+                </p>
+                <p *ngIf="myForm.controls['cni'].hasError('minlength')">
+                  Votre CNI doit avoir au moins 9 caractères.
+                </p>
+                <p *ngIf="myForm.controls['cni'].hasError('maxLength')">
+                  Trop de caractères sur votre CNI.
+                </p>
+                <p *ngIf="myForm.controls['cni'].hasError('pattern')">
+                  Format de la cni incorrect.
+                </p>
+              </ion-item>
+            </ion-row>
+            <ion-row class="form-group" [ngClass]="{'has-error':!myForm.controls['name'].valid}">
+              <ion-item>
+                <ion-label position="floating">Nom et prénom du client</ion-label>
+                <ion-input type="text" class="form-control" name="name" formControlName="name"> </ion-input>
+              </ion-item>
+              <ion-item>
+                <p *ngIf="myForm.controls['name'].hasError('required') && myForm.controls['name'].dirty">
+                  Name is required
+                </p>
+                <p *ngIf="myForm.controls['name'].hasError('minlength')">Saisissez un nom.
+                </p>
+              </ion-item>
+
+            </ion-row>
+            <ion-row>
+              <ion-item>
+                <ion-label position="floating">Code paiement</ion-label>
+                <ion-input type="text" class="form-control" name="codePayement" formControlName="codePayement">
+                </ion-input>
+              </ion-item>
+            </ion-row>
+            <ion-row class="form-group" [ngClass]="{'has-error':!myForm.controls['tel'].valid}">
+              <ion-item>
+                <ion-label position="floating">Num Téléphone</ion-label>
+                <ion-input type="tel" class="form-control" id="tel" name="tel" formControlName="tel"> </ion-input>
+              </ion-item>
+              <ion-item>
+                <p *ngIf="myForm.controls['tel'].hasError('minlength')">
+                   Numéro téléphone incorrect.
+                </p>
+                <p *ngIf="myForm.controls['tel'].hasError('required') && myForm.controls['tel'].dirty">
+                  phone is required
+                </p>
+                <p *ngIf="myForm.controls['tel'].hasError('pattern')">
+                  Le format n'est pas correct.
+                </p>
+              </ion-item>
+
+            </ion-row>
+            <ion-row>
+              <ion-item>
+                <ion-label position="floating">Email</ion-label>
+                <ion-input type="email" name="email" formControlName="email">
+                </ion-input>
+              </ion-item>
+            </ion-row>
+
+            <!-- <ion-row> -->
+            <ion-button type="submit" expand="block" [disabled]="!myForm.valid">Payer</ion-button>
+            <!-- </ion-row> -->
+          </ion-grid>
+        </form>
+      </ion-card>
+    </ion-slide>
+
+  </ion-slides>
+</ion-content>

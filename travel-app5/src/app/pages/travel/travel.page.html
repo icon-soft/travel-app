@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Les villes de départ</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="background">
+  <ion-list id="inbox-list" *ngIf="villes">
+    <ion-menu-toggle auto-hide="false">
+      <ion-item *ngFor="let p of villes; let i = index" (click)="selectedIndex = i" routerDirection="root"
+        [routerLink]="'/travel-agency/'+[p.id]+'/'+[p.name]" lines="none" detail="false" [class.selected]="selectedIndex == i">
+        <!-- <ion-icon slot="start" name="paper-plane"></ion-icon> -->
+        <ion-icon slot="start" name="home"></ion-icon>
+        <ion-label>{{ p.name }} </ion-label>
+      </ion-item>
+    </ion-menu-toggle>
+  </ion-list>
+
+</ion-content>

@@ -1,0 +1,14 @@
+p {
+    font-size: 0.9em;
+    // color: #d2d2d2;
+    color: #fa2222;
+    font-style: italic;
+  }
+
+  ion-label, .select-text {
+    margin-left: 10px;
+  }
+
+  span:before {content:""; display: block; }
+
+  span::after { content: "\A"; }
